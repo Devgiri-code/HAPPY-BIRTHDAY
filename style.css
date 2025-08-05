@@ -1,0 +1,378 @@
+/* style.css */
+
+/* Gwen font from Fontfabric */
+@font-face {
+  font-family: 'Gwen';
+  src: url('https://fontfabric.com/fonts/gwen/gwen-regular.woff2') format('woff2'),
+       url('https://fontfabric.com/fonts/gwen/gwen-regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  font-family: 'Patrick Hand', cursive;
+  background-color: #fffef9;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.page {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 1s ease-in-out;
+}
+
+/* Page 1 - Landing */
+#page1 {
+  background: url('bg/page 1.jpg') no-repeat center center/cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 5;
+  position: relative;
+  overflow: hidden;
+}
+
+#page1 h1 {
+  font-family: 'Great Vibes', cursive;
+  font-weight: normal;
+  font-size: 3.8rem;
+  color: #fff;
+  text-shadow: 5px 5px 15px rgba(0, 0, 0, 0.7);
+  z-index: 2;
+  animation: popper 0.6s ease-out forwards;
+  text-transform: none;
+  user-select: none;
+}
+
+#swipeHint {
+  font-size: 1.2rem;
+  margin-top: 20px;
+  animation: blink 1.5s infinite;
+  color: white;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  user-select: none;
+}
+
+/* Swipe icon arrows below swipeHint */
+#swipeIcon {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+#swipeIcon .arrow {
+  width: 15px;
+  height: 15px;
+  border-left: 3px solid white;
+  border-bottom: 3px solid white;
+  transform: rotate(45deg);
+  animation: swipeArrow 1.2s infinite;
+  opacity: 0.8;
+}
+
+/* Animate arrows with delay */
+#swipeIcon .arrow:nth-child(2) {
+  animation-delay: 0.6s;
+}
+
+/* Page 2 - Photo Gallery */
+#page2 {
+  background: url('bg/page 2.jpg') no-repeat center center/cover;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  gap: 1rem;
+  transform: translateY(100%);
+  overflow-y: auto;
+  z-index: 4;
+  -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+}
+
+.photo-frame {
+  width: 180px;
+  height: 220px;
+  background: white;
+  padding: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s;
+  cursor: pointer;
+  position: relative;
+  border-radius: 8px;
+  user-select: none;
+}
+
+.photo-frame:active {
+  transform: scale(0.98);
+}
+
+.photo-frame::after {
+  content: '📸';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 1.2rem;
+  user-select: none;
+}
+
+.photo-frame:hover {
+  transform: scale(1.05);
+}
+
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  user-select: none;
+}
+
+/* Letter Button */
+#letterBtn {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 100px;
+  background: #ff69b4;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  animation: blink 2s infinite;
+  cursor: pointer;
+  z-index: 5;
+  color: #fff;
+  flex-direction: column;
+  user-select: none;
+  padding: 0.5rem;
+}
+
+#letterBtn span {
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+/* Page 3 - Letter */
+#page3 {
+  background: url('https://www.transparenttextures.com/patterns/notebook.png');
+  background-color: #fffef9;
+  background-repeat: repeat;
+  transform: translateY(200%);
+  padding: 2rem;
+  font-family: 'Patrick Hand', cursive;
+  color: #000;
+  font-size: 1.4rem;
+  line-height: 1.8;
+  z-index: 3;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#page3 .letter-content {
+  max-width: 800px;
+  margin: auto;
+  background: #fff;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  border-radius: 12px;
+  height: 80vh;
+  overflow-y: auto;
+  border: 2px dashed #f99;
+  user-select: text;
+  white-space: pre-wrap;
+}
+
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 99999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.modal-content {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  user-select: none;
+  transition: transform 0.3s ease;
+}
+
+.close {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 2.5rem;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  z-index: 100000;
+}
+
+/* Animations */
+@keyframes blink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@keyframes popper {
+  0% { transform: scale(0.8); }
+  100% { transform: scale(1.05); }
+}
+
+@keyframes swipeArrow {
+  0% { transform: rotate(45deg) translate(0, 0); opacity: 0.8; }
+  50% { transform: rotate(45deg) translate(0, 10px); opacity: 0; }
+  100% { transform: rotate(45deg) translate(0, 0); opacity: 0.8; }
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+  #page1 h1 {
+    font-size: 2.2rem;
+  }
+
+  #swipeHint {
+    font-size: 1rem;
+  }
+
+  .photo-frame {
+    width: 140px;
+    height: 170px;
+  }
+
+  #letterBtn {
+    width: 70px;
+    height: 70px;
+    font-size: 1.8rem;
+  }
+
+  #letterBtn span {
+    font-size: 0.7rem;
+  }
+
+  #page3 .letter-content {
+    font-size: 1.1rem;
+    padding: 1rem;
+    height: 70vh;
+  }
+
+  .modal-content {
+    max-width: 100vw;
+    max-height: 80vh;
+  }
+}
+
+#letterBtn {
+  box-shadow: 0 0 15px #ff69b4, 0 0 25px #ff69b4, 0 0 35px #ff69b4;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#page3::before {
+  content: "Written with love 💌";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  font-size: 3rem;
+  color: rgba(255, 105, 180, 0.1);
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+
+
+
+
+/* Lightbox container */
+#lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(8px);
+  z-index: 999;
+}
+
+
+
+
+
+
+
+
+
+/* Enlarged image */
+#lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+  box-shadow: 0 0 20px #fff;
+  transition: transform 0.3s ease;
+  transform: scale(1);
+}
+
+/* Show lightbox */
+#lightbox.show {
+  display: flex;
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+#lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+  box-shadow: 0 0 20px #fff;
+  animation: zoomIn 0.5s ease forwards;
+  opacity: 0; /* Will animate to 1 */
+}

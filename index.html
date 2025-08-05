@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Birthday, Love!</title>
+
+  <!-- Gwen font fallback font is loaded via CSS @font-face in style.css -->
+
+  <!-- Patrick Hand from Google Fonts for letter page -->
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet" />
+
+  <!-- Link to external stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Canvas Confetti library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+  <!-- 🎵 Music -->
+  <audio id="bg-music" autoplay loop>
+    <source src="D:\HAPPY BIRTHDAY\song\Sooryavanshi_ Mere Yaaraa Song  Akshay Kumar, Katrina Kaif, Rohit Shetty, Arijit S Neeti  JAM8 KAG.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- 🎉 Page 1 -->
+  <div class="page" id="page1">
+    <h1>Happy Birthday Namrata🥳♥</h1>
+    <p id="swipeHint">Swipe up...</p>
+  </div>
+
+  <!-- 📸 Page 2 -->
+
+
+
+<div id="lightbox">
+  <img id="lightbox-img" src="" alt="enlarged photo" />
+</div>
+
+
+
+
+
+
+  <div class="page" id="page2">
+    <div class="photo-frame"><img src="album/photo 1.jpg" alt="photo" onclick="openLightbox(this.src)"> </div>
+    <div class="photo-frame"><img src="album/photo 2.jpg" alt="photo" onclick="openLightbox(this.src)"></div>
+    <div class="photo-frame"><img src="album/photo 3.jpg" alt="photo" onclick="openLightbox(this.src)"></div>
+    <div class="photo-frame"><img src="album/photo 4.jpg" alt="photo" onclick="openLightbox(this.src)"></div>
+    <div class="photo-frame"><img src="album/photo 5.jpg" alt="photo" onclick="openLightbox(this.src)"></div>
+
+    <div id="letterBtn" title="Click to see the letter">✉️ <span>Click Me!</span></div>
+  </div>
+
+  <!-- 💌 Page 3 -->
+  <div class="page" id="page3">
+    <div class="letter-content" id="letterText"></div>
+  </div>
+
+  <!-- 📜 Script -->
+  <script>
+
+
+
+
+
+function openLightbox(src) {
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  lightboxImg.src = src;
+  lightbox.classList.add('show');
+}
+
+document.getElementById('lightbox').addEventListener('click', () => {
+  document.getElementById('lightbox').classList.remove('show');
+});
+
+
+
+
+
+
+
+
+
+
+
+    const page1 = document.getElementById('page1');
+    const page2 = document.getElementById('page2');
+    const page3 = document.getElementById('page3');
+    const letterBtn = document.getElementById('letterBtn');
+    const letterText = document.getElementById('letterText');
+
+    let currentPage = 1;
+
+    function goToPage2() {
+      page1.style.transform = 'translateY(-100%)';
+      page2.style.transform = 'translateY(0%)';
+      currentPage = 2;
+    }
+
+    function goToPage3() {
+      page2.style.transform = 'translateY(-100%)';
+      page3.style.transform = 'translateY(0%)';
+      currentPage = 3;
+      typeLetter();
+    }
+
+    function typeLetter() {
+      const text = `Happy Birthday to my Jaan
+
+Kyarno aa divas no wait kartoto, wait kartoto kevi rite tane special feel karais even though I am not there with you, and hakikat to ej che ke I MISS YOU LIKE CRAZY, khali aajej nai ho, but every single day. But aaje mane bav ichha hati that I could be right next to you.
+
+Kai nai, bus thodo time... Mane khbr che apde long-distance ma chiye and this thing is not easy at all. Pan bhale koi bhi situation hoi, I always carry you with me, sometimes in my heart, sometimes in my thoughts, je bhi kaam karto hovu ema tu aay jaas (LOL). Jyare bhi rough days hoi ke overthinking karto hovu, you came like a blessing. You are the one person who makes everything feel okay.
+
+Haji pn yaad che taro last birthday, the level of comfort and peace I felt talking, living, and laughing with you was literally heaven for me. Mane to khabar aj nathi ke ek chokri sathe revani atli maja aave, and over time it has grown stronger.
+
+Namrata, you are home to me. No matter where I go, no matter what I do, I just want to build a life that leads back to you.
+
+Chalo a badhu chhodo, aaje party no birthday che. Mare tane e badhu j feel karavu che je tu mane feel karavti che – loved, wanted, appreciated, and most important: understood. Tu etlu badhi happiness deserve karas ke ene measure karva ni koi scale j nathi. Ej scale hu banis, I promise, not just today, but every day, for the rest of our lives.
+
+I know bavvvvv badha ups & downs joya che apde, especially 2025. But mane etli khbr che, bhale kai pan thai jaay, apde ek bijja uper give up nathi karvana. YOOO.
+
+Enjoy your day, meri jaan. Smile a lot, laugh like you always do, and just know that there’s someone here, sitting far away, thinking only of you, madly in love with you.
+
+I love you more than I’ve ever said out loud. And one day, soon, aa badhu j tane tari same tari aankho ma joine ne kais...
+
+Yours,
+BUNNY 🐰`;
+
+      letterText.textContent = '';
+      let i = 0;
+      const interval = setInterval(() => {
+        if (i < text.length) {
+          letterText.textContent += text[i];
+          i++;
+        } else {
+          clearInterval(interval);
+        }
+      }, 40);
+    }
+
+    // ✨ Swipe gesture detection (for PC and mobile)
+    let startY = 0;
+
+    function startSwipe(e) {
+      startY = e.touches ? e.touches[0].clientY : e.clientY;
+    }
+
+    function endSwipe(e) {
+      const endY = e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
+      const deltaY = startY - endY;
+
+      if (deltaY > 50 && currentPage === 1) {
+        goToPage2();
+      }
+    }
+
+    // Apply swipe detection to page1
+    page1.addEventListener('mousedown', startSwipe);
+    page1.addEventListener('mouseup', endSwipe);
+    page1.addEventListener('touchstart', startSwipe);
+    page1.addEventListener('touchend', endSwipe);
+
+    // Letter button
+    letterBtn.addEventListener('click', goToPage3);
+
+    // 🎉 Confetti animation
+    function startConfetti() {
+      const duration = 600;
+      const animationEnd = Date.now() + duration;
+      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999 };
+
+      (function frame() {
+        const timeLeft = animationEnd - Date.now();
+        if (timeLeft <= 0) return;
+
+        const particleCount = 50 * (timeLeft / duration);
+        confetti(Object.assign({}, defaults, {
+          particleCount,
+          origin: { x: Math.random(), y: Math.random() * 0.6 }
+        }));
+
+        requestAnimationFrame(frame);
+      })();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      startConfetti();
+    });
+
+    // 🔊 Music play on click
+    document.addEventListener('click', () => {
+      const audio = document.getElementById('bg-music');
+      if (audio && audio.paused) {
+        audio.play();
+      }
+    }, { once: true });
+
+    
+  </script>
+
+</body>
+</html>
