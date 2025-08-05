@@ -63,6 +63,14 @@
   <script>
 
 
+document.addEventListener('DOMContentLoaded', () => {
+  // Reset pages to initial position on reload
+  page1.style.transform = 'translateY(0%)';
+  page2.style.transform = 'translateY(100%)';
+  page3.style.transform = 'translateY(200%)';
+
+  startConfetti();
+});
 
 
 
